@@ -1,42 +1,51 @@
 import type { InferGetStaticPropsType } from 'next';
 import { gql } from 'graphql-request';
 import { cmsConnect } from '../src/utils/cmsConnect';
-import { HomeTemplate } from '../src/components/templates/HomeTemplate/HomeTemplate';
+import Homepage from '../src/components/templates/Homepage/Homepage';
+import Banner from '../src/components/Banner/Banner';
+import Categories from '../src/components/Categories/Categories';
+import SearchPanel from '../src/components/SearchPanel/SearchPanel';
 
 export const getStaticProps = async () => {
   const query = gql`
-    query AllPlaces {
-      places {
+    query AllCategories {
+      categories {
+        categoryDesc
+        categoryLongDesc
+        categoryName
+        courses {
+          id
+        }
+        createdAt
         id
+        publishedAt
+        updatedAt
         slug
-        title
-        location
-        description
-        image {
-          url
+        boxColor {
+          hex
         }
       }
     }
   `;
 
-  const { places } = await cmsConnect(query);
+  const { categories } = await cmsConnect(query);
 
   return {
     props: {
-      places,
+      categories,
     },
   };
 };
 
-
-
-const Home = ({ places }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(places);
+const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  console.log(categories);
   return (
     <div className='app'>
-    <HomeTemplate places={places}>
-      <h1>aa</h1>
-    </HomeTemplate>
+      <Homepage>
+        <Banner />
+        <Categories categories={categories} />
+        <SearchPanel />
+      </Homepage>
     </div>
   );
 };

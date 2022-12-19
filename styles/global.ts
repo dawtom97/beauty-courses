@@ -19,6 +19,16 @@ export const GlobalStyles = createGlobalStyle<{theme:GlobalStylesProps}>`
         font-size: 10px;
     }
 
+    ::placeholder, input, textarea {
+        font-family:'Montserrat',sans-serif;
+        color:${props=>props.theme.text};
+    }
+    input[type="text"], textarea {
+        font-family:'Montserrat',sans-serif;
+        color:${props=>props.theme.text};
+        font-size: 1.4rem;
+    }
+
     body {
         font-family:'Montserrat',sans-serif;
         background-color: ${props=>props.theme.body};

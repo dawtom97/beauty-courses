@@ -1,7 +1,7 @@
 import { gql, GraphQLClient } from 'graphql-request';
 
 type VariablesObject = {
-  pageSlug: string | string[] | undefined;
+  slug: string | string[] | undefined;
 };
 
 export const cmsConnect = async (query: string, variables?: VariablesObject) => {
