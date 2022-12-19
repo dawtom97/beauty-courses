@@ -2,49 +2,92 @@ import type { InferGetStaticPropsType } from 'next';
 import { gql } from 'graphql-request';
 import { cmsConnect } from '../src/utils/cmsConnect';
 import Homepage from '../src/components/templates/Homepage/Homepage';
-import Banner from '../src/components/Banner/Banner';
-import Categories from '../src/components/Categories/Categories';
 import SearchPanel from '../src/components/SearchPanel/SearchPanel';
+import CourseCard from '../src/components/common/CourseCard/CourseCard';
+import Featured from '../src/components/Featured/Featured';
 
-export const getStaticProps = async () => {
+// export const getStaticProps = async () => {
+//   const query = gql`
+//     query AllCategories {
+//       categories {
+//         categoryDesc
+//         categoryLongDesc
+//         categoryName
+//         courses {
+//           id
+//         }
+//         createdAt
+//         id
+//         publishedAt
+//         updatedAt
+//         slug
+//         boxColor {
+//           hex
+//         }
+//       }
+//     }
+//   `;
+
+//   const { categories } = await cmsConnect(query);
+
+//   return {
+//     props: {
+//       categories,
+//     },
+//   };
+// };
+
+export const getServerSideProps = async (context: any) => {
   const query = gql`
-    query AllCategories {
-      categories {
-        categoryDesc
-        categoryLongDesc
-        categoryName
-        courses {
-          id
-        }
-        createdAt
+    query Course {
+      courses(orderBy: createdAt_DESC, first: 4) {
+        title
         id
-        publishedAt
-        updatedAt
-        slug
-        boxColor {
-          hex
+        price
+        duration
+        level
+        vacancies
+        dropdowns {
+          html
+        }
+        voivodeship
+        city
+        thumbnail {
+          url
+        }
+        description {
+          html
+        }
+        shortDesc
+        isRefunded
+        categories {
+          id
+          categoryName
+          categoryImage {
+            id
+            url
+          }
         }
       }
     }
   `;
 
-  const { categories } = await cmsConnect(query);
+  const { courses } = await cmsConnect(query);
 
   return {
     props: {
-      categories,
+      courses: courses,
     },
   };
 };
 
-const Home = ({ categories }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  console.log(categories);
+const Home = ({ courses }: InferGetStaticPropsType<typeof getServerSideProps> | any) => {
+  console.log(courses);
   return (
     <div className='app'>
       <Homepage>
-        <Banner />
-        <Categories categories={categories} />
         <SearchPanel />
+        <Featured courses={courses} />
       </Homepage>
     </div>
   );

@@ -17,6 +17,7 @@ export const GlobalStyles = createGlobalStyle<{theme:GlobalStylesProps}>`
 
     html {
         font-size: 10px;
+        scroll-behavior: smooth;
     }
 
     ::placeholder, input, textarea {
@@ -32,6 +33,10 @@ export const GlobalStyles = createGlobalStyle<{theme:GlobalStylesProps}>`
     body {
         font-family:'Montserrat',sans-serif;
         background-color: ${props=>props.theme.body};
+        color:${props=>props.theme.text};
+    }
+    a {
+        text-decoration: none;
         color:${props=>props.theme.text};
     }
 `

@@ -18,6 +18,7 @@ import iconRefunded from '../../../assets/iconalt_refunded.svg';
 import iconAltPlace from '../../../assets/iconalt_place.svg';
 import CourseDropdownItem from '../CourseDropdownItem';
 import { ErrorText } from '../../common/ErrorText/ErrorText';
+import Link from 'next/link';
 
 const initialState = {
   email: '',
@@ -90,7 +91,7 @@ const CourseDetailsContent = ({
     <Styled.Wrapper>
       <Styled.Content>
         <Styled.Overview>
-          <div>
+          <div id='Program'>
             <h3>{title}</h3>
             <h6>Opis kursu</h6>
             <Styled.InnerHTML dangerouslySetInnerHTML={{ __html: description.html }} />
@@ -104,7 +105,7 @@ const CourseDetailsContent = ({
             </Styled.Dropdowns>
           </div>
 
-          <Styled.FormBox>
+          <Styled.FormBox id='Form'>
             <h3>Zapisz się na kurs</h3>
             <form onSubmit={(e) => sendEmail(e)}>
               <div>
@@ -119,36 +120,36 @@ const CourseDetailsContent = ({
                   {errors?.firstname && <ErrorText>{errors.firstname}</ErrorText>}
                 </div>
                 <div>
-                <input
-                  name='lastname'
-                  value={email.lastname}
-                  onChange={handleEmail}
-                  placeholder='Nazwisko'
-                  type='text'
-                />
-                 {errors?.lastname && <ErrorText>{errors.lastname}</ErrorText>}
+                  <input
+                    name='lastname'
+                    value={email.lastname}
+                    onChange={handleEmail}
+                    placeholder='Nazwisko'
+                    type='text'
+                  />
+                  {errors?.lastname && <ErrorText>{errors.lastname}</ErrorText>}
                 </div>
               </div>
               <div>
                 <div>
-                <input
-                  name='email'
-                  value={email.email}
-                  onChange={handleEmail}
-                  placeholder='Adres Email'
-                  type='text'
-                />
-                   {errors?.email && <ErrorText>{errors.email}</ErrorText>}
+                  <input
+                    name='email'
+                    value={email.email}
+                    onChange={handleEmail}
+                    placeholder='Adres Email'
+                    type='text'
+                  />
+                  {errors?.email && <ErrorText>{errors.email}</ErrorText>}
                 </div>
                 <div>
-                <input
-                  name='phone'
-                  value={email.phone}
-                  onChange={handleEmail}
-                  placeholder='Telefon'
-                  type='text'
-                />
-                 {errors?.phone && <ErrorText>{errors.phone}</ErrorText>}
+                  <input
+                    name='phone'
+                    value={email.phone}
+                    onChange={handleEmail}
+                    placeholder='Telefon'
+                    type='text'
+                  />
+                  {errors?.phone && <ErrorText>{errors.phone}</ErrorText>}
                 </div>
               </div>
               <textarea
@@ -171,15 +172,21 @@ const CourseDetailsContent = ({
               Koszt: <span>{price} zł</span>
             </Styled.Price>
             <Styled.Buttons>
-              <Button>
-                <HiOutlineBookOpen />
-                Program
-              </Button>
+              <Link href='#Program'>
+                <Button>
+                  <HiOutlineBookOpen />
+                  Program
+                </Button>
+              </Link>
+
               <Button>
                 <AiOutlineShareAlt /> Udostępnij
               </Button>
             </Styled.Buttons>
-            <Button>Zapisz się</Button>
+
+            <Link href='#Form'>
+              <Button> Zapisz się </Button>
+            </Link>
           </Styled.AsideBox>
           <Styled.AsideBox>
             <h3>Szczegóły</h3>
