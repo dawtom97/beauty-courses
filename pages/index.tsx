@@ -5,6 +5,8 @@ import Homepage from '../src/components/templates/Homepage/Homepage';
 import SearchPanel from '../src/components/SearchPanel/SearchPanel';
 import CourseCard from '../src/components/common/CourseCard/CourseCard';
 import Featured from '../src/components/Featured/Featured';
+import Categories from '../src/components/Categories/Categories';
+import About from '../src/components/About/About';
 
 // export const getStaticProps = async () => {
 //   const query = gql`
@@ -69,25 +71,49 @@ export const getServerSideProps = async (context: any) => {
           }
         }
       }
+      categories {
+        categoryName
+        boxColor {
+          hex
+        }
+        courses {
+          id
+          title
+        }
+      }
+      sectionsDesc {
+        id
+        title
+        desc
+        badge
+      }
     }
   `;
 
-  const { courses } = await cmsConnect(query);
+  const { courses, categories, sectionsDesc } = await cmsConnect(query);
 
   return {
     props: {
       courses: courses,
+      categories: categories,
+      sections: sectionsDesc
     },
   };
 };
 
-const Home = ({ courses }: InferGetStaticPropsType<typeof getServerSideProps> | any) => {
-  console.log(courses);
+const Home = ({
+  courses,
+  categories,
+  sections
+}: InferGetStaticPropsType<typeof getServerSideProps> | any) => {
+  console.log(sections);
   return (
     <div className='app'>
       <Homepage>
         <SearchPanel />
-        <Featured courses={courses} />
+        <Featured section={sections[0]} courses={courses} />
+        <Categories section={sections[1]} categories={categories} />
+        <About section={sections[2]} />
       </Homepage>
     </div>
   );

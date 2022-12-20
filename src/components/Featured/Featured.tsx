@@ -6,24 +6,19 @@ import arrow from '../../assets/course-bg.png';
 import { Button } from '../common/Button/Button';
 import Link from 'next/link';
 
-const Featured = ({ courses }: any) => {
+const Featured = ({ courses, section }: any) => {
   return (
     <Styled.Wrapper bg={bg.src} arrow={arrow.src}>
       <Styled.Content>
-        <span>Co nowego?</span>
+        <span>{section?.badge}</span>
         <Styled.Top>
-          <h2>Najnowsze kursy</h2>
+          <h2>{section?.title}</h2>
           <Button>
-            <Link href='/kursy'>
-              Wszystkie
-            </Link>
+            <Link href='/kursy'>Wszystkie</Link>
           </Button>
         </Styled.Top>
 
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eget aenean accumsan bibendum
-          gravida maecenas augue elementum et neque. Suspendisse imperdiet.
-        </p>
+        <p>{section?.desc}</p>
         <div>
           {courses.map((course: any) => (
             <CourseCard key={course.id} course={course} />
