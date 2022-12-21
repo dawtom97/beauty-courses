@@ -2,20 +2,22 @@ import styled from 'styled-components';
 
 interface Props {
   bg: string;
-  arrow:string
+  arrow: string;
 }
 
+
+// linear-gradient(rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.1) 80%)
+
 export const Wrapper = styled.div<Props>`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.1) 80%),
-    url(${({ bg }) => bg});
+  background-image: url(${({ bg }) => bg});
 
   padding: 7rem 0;
   position: relative;
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
-    background-image: url(${({arrow})=>arrow});
+    background-image: url(${({ arrow }) => arrow});
     width: 100%;
     height: 100%;
     top: 0;
@@ -56,7 +58,6 @@ export const Content = styled.div`
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 1rem;
-
   }
 
   & p {
@@ -66,8 +67,8 @@ export const Content = styled.div`
     margin-top: 1rem;
     margin-bottom: 3rem;
 
-    @media (max-width:576px) {
-        max-width: 100%;
+    @media (max-width: 576px) {
+      max-width: 100%;
     }
   }
 `;

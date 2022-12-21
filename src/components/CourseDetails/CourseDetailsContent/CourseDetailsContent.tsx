@@ -37,6 +37,7 @@ const CourseDetailsContent = ({
   duration,
   level,
   vacancies,
+  employment,
   isRefunded,
   voivodeship,
 }: any) => {
@@ -190,7 +191,7 @@ const CourseDetailsContent = ({
           </Styled.AsideBox>
           <Styled.AsideBox>
             <h3>Szczegóły</h3>
-            <IconWithText icon={iconPeople} text={`${vacancies} miejsc`} />
+            <IconWithText icon={iconPeople} text={`Osoba ${employment}`} />
             <IconWithText icon={iconAltDuration} text={`${duration} godzin`} />
             <IconWithText icon={iconAltLevel} text={`Poziom ${level}`} />
             <IconWithText icon={iconAltPlace} text={`${voivodeship}`} />

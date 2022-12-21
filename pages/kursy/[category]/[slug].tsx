@@ -17,6 +17,7 @@ export const getServerSideProps = async (context: any) => {
         duration
         level
         isRemote
+        employment
         vacancies
         dropdowns {
           html

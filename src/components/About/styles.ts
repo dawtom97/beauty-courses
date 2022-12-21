@@ -6,8 +6,7 @@ interface Props {
 }
 
 export const Wrapper = styled.div<Props>`
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.1) 80%),
-    url(${({ bg }) => bg});
+  background-image: url(${({ bg }) => bg});
 
   position: relative;
   margin-top: 5%;

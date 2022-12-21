@@ -3,10 +3,10 @@ import { gql } from 'graphql-request';
 import { cmsConnect } from '../src/utils/cmsConnect';
 import Homepage from '../src/components/templates/Homepage/Homepage';
 import SearchPanel from '../src/components/SearchPanel/SearchPanel';
-import CourseCard from '../src/components/common/CourseCard/CourseCard';
 import Featured from '../src/components/Featured/Featured';
 import Categories from '../src/components/Categories/Categories';
 import About from '../src/components/About/About';
+import Banner from '../src/components/Banner/Banner';
 
 // export const getStaticProps = async () => {
 //   const query = gql`
@@ -50,6 +50,7 @@ export const getServerSideProps = async (context: any) => {
         isRemote
         level
         vacancies
+        employment
         dropdowns {
           html
         }
@@ -86,6 +87,7 @@ export const getServerSideProps = async (context: any) => {
         id
         title
         desc
+        desc2
         badge
       }
     }
@@ -111,6 +113,7 @@ const Home = ({
   return (
     <div className='app'>
       <Homepage>
+        <Banner section={sections[4]}/>
         <SearchPanel section={sections[3]} categories={categories}/>
         <Featured section={sections[0]} courses={courses} />
         <Categories section={sections[1]} categories={categories} />
