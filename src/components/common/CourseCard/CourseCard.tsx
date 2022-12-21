@@ -25,7 +25,7 @@ const CourseCard = ({ course }: any) => {
           </Styled.ImageBox>
           <Styled.Content>
             <Styled.Top>
-              <p>{course.city}</p>
+              <p>{course.isRemote === true ? 'Zdalne' : course.city}</p>
               <Styled.Badge>{course.categories[0].categoryName}</Styled.Badge>
             </Styled.Top>
             <h3>{course.title.length > 40 ? course.title.slice(0,40) + '...' : course.title}</h3>

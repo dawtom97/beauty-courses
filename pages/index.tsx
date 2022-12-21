@@ -47,6 +47,7 @@ export const getServerSideProps = async (context: any) => {
         id
         price
         duration
+        isRemote
         level
         vacancies
         dropdowns {
@@ -106,11 +107,11 @@ const Home = ({
   categories,
   sections
 }: InferGetStaticPropsType<typeof getServerSideProps> | any) => {
-  console.log(sections);
+  console.log(courses);
   return (
     <div className='app'>
       <Homepage>
-        <SearchPanel />
+        <SearchPanel section={sections[3]} categories={categories}/>
         <Featured section={sections[0]} courses={courses} />
         <Categories section={sections[1]} categories={categories} />
         <About section={sections[2]} />
