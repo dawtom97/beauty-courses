@@ -90,16 +90,29 @@ export const getServerSideProps = async (context: any) => {
         desc2
         badge
       }
+      minorDatas {
+        id
+        email
+        phone
+        address
+        trainers
+        students
+        rating
+        ratingAmount
+        expYears
+        coursesAmount
+      }
     }
   `;
 
-  const { courses, categories, sectionsDesc } = await cmsConnect(query);
+  const { courses, categories, sectionsDesc,minorDatas } = await cmsConnect(query);
 
   return {
     props: {
       courses: courses,
       categories: categories,
-      sections: sectionsDesc
+      sections: sectionsDesc,
+      minor: minorDatas
     },
   };
 };
@@ -107,14 +120,14 @@ export const getServerSideProps = async (context: any) => {
 const Home = ({
   courses,
   categories,
-  sections
+  sections,
+  minor
 }: InferGetStaticPropsType<typeof getServerSideProps> | any) => {
-  console.log(courses);
   return (
     <div className='app'>
-      <Homepage>
-        <Banner section={sections[4]}/>
-        <SearchPanel section={sections[3]} categories={categories}/>
+      <Homepage contact={minor[0]}>
+        <Banner section={sections[4]} info={minor[0]} />
+        <SearchPanel section={sections[3]} categories={categories} />
         <Featured section={sections[0]} courses={courses} />
         <Categories section={sections[1]} categories={categories} />
         <About section={sections[2]} />

@@ -96,12 +96,13 @@ export const SelectField = styled.div`
   }
 
   & select {
-    border: none;
+   
     font-weight: 700;
     margin-left: -4px;
     font-size: 1.8rem;
     cursor: pointer;
     background-color: transparent;
     outline: none;
+    border-color: #fff;
   }
 `;

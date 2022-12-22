@@ -36,28 +36,28 @@ export const Navbar = () => {
             </Link>
           </li>
           <li onClick={handleLinkClick}>
-            <Link href='/projects' passHref>
+            <Link href={pathname === '/' ? '#Featured' : '/#Featured'} passHref>
               <Styled.CustomLink
-                isActive={asPath === '/projects' ? true : false}
-                href='/projects'
+                isActive={asPath === '/#Featured' ? true : false}
+                href='/#Featured'
               >
                 KURSY
               </Styled.CustomLink>
             </Link>
           </li>
           <li onClick={handleLinkClick}>
-            <Link href='/reference' passHref>
+            <Link href={pathname === '/' ? '#Search' : '/#Search'} passHref>
               <Styled.CustomLink
-                isActive={asPath === '/reference' ? true : false}
-                href='/reference'
+                isActive={asPath === '/#Search' ? true : false}
+                href='/#Search'
               >
                 WYSZUKIWARKA
               </Styled.CustomLink>
             </Link>
           </li>
           <li onClick={handleLinkClick}>
-            <Link href={pathname === '/' ? '#contact' : '/'} passHref>
-              <Styled.CustomLink  isActive={asPath === '/#contact' ? true : false}>KONTAKT</Styled.CustomLink>
+            <Link href={pathname === '/' ? '#Contact' : '/#Contact'} passHref>
+              <Styled.CustomLink  isActive={asPath === '/#Contact' ? true : false}>KONTAKT</Styled.CustomLink>
             </Link>
           </li>
           <Button onClick={handleLinkClick}>

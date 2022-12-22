@@ -41,25 +41,32 @@ export const getServerSideProps = async (context: any) => {
           }
         }
       }
+      minorDatas {
+        id
+        email
+        phone
+        address
+      }
     }
   `;
   const variables = {
     slug,
   };
 
-  const { courses } = await cmsConnect(query, variables);
+  const { courses, minorDatas } = await cmsConnect(query, variables);
 
   return {
     props: {
       course: courses,
+      minor:minorDatas
     },
   };
 };
 
-const CourseDetailsPage = ({ course }: any) => {
+const CourseDetailsPage = ({ course,minor }: any) => {
 
   return (
-    <CourseDetailsTemplate>
+    <CourseDetailsTemplate contact={minor[0]}>
       <CourseDetailsBanner {...course[0]}/>
       <CourseDetailsContent {...course[0]} />
     </CourseDetailsTemplate>

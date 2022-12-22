@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 interface Props {
-  bg: string;
   arrow: string;
 }
+
 
 // linear-gradient(rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.1) 80%)
 
 export const Wrapper = styled.div<Props>`
-  background-image: url(${({ bg }) => bg});
-
   padding: 7rem 0;
   position: relative;
-
+  background-color: #fafafa;
   &::before {
     content: '';
     position: absolute;
@@ -29,6 +27,7 @@ export const Top = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   & button {
     border-width: 3px;
   }
@@ -39,16 +38,15 @@ export const Cards = styled.div`
   gap: 2.4rem;
   grid-template-columns: repeat(4, 1fr);
 
-  @media (max-width:1400px) {
-    grid-template-columns: repeat(3,1fr);
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(3, 1fr);
   }
-  @media (max-width:992px) {
-    grid-template-columns: repeat(2,1fr);
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
   }
-  @media (max-width:768px) {
-    grid-template-columns: 1fr
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
   }
-
 `;
 
 export const Content = styled.div`
@@ -59,7 +57,8 @@ export const Content = styled.div`
   margin: 0 auto;
 
   & h2 {
-    font-size: 3rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
 
   & span {
@@ -82,3 +81,18 @@ export const Content = styled.div`
     }
   }
 `;
+
+export const NotFound = styled.div`
+  text-align: center;
+  margin: 3rem 0;
+
+  & button {
+    margin: 3rem auto;
+    color: white;
+    cursor: pointer;
+    height: 50px;
+    background: #f66962;
+    max-width: initial;
+    width: 300px;
+  }
+`

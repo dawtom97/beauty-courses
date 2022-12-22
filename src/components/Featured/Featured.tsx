@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 const Featured = ({ courses, section }: any) => {
   return (
-    <Styled.Wrapper bg={bg.src} arrow={arrow.src}>
+    <Styled.Wrapper id='Featured' bg={bg.src} arrow={arrow.src}>
       <Styled.Content>
         <span>{section?.badge}</span>
         <Styled.Top>
@@ -19,11 +19,11 @@ const Featured = ({ courses, section }: any) => {
         </Styled.Top>
 
         <p>{section?.desc}</p>
-        <div>
+        <Styled.Cards>
           {courses.map((course: any) => (
             <CourseCard key={course.id} course={course} />
           ))}
-        </div>
+        </Styled.Cards>
       </Styled.Content>
     </Styled.Wrapper>
   );

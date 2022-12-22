@@ -7,9 +7,9 @@ import iconEmail from '../../../assets/iconMessage.svg';
 import iconPhone from '../../../assets/icon_phone.svg';
 import IconWithText from '../IconWithText/IconWithText';
 
-const Footer = () => {
+const Footer = ({contact}:any) => {
   return (
-    <Styled.Wrapper>
+    <Styled.Wrapper id="Contact">
       <Styled.InnerWrapper>
         <Styled.IconBox>
           <Image src={logo.src} width={120} height={30} />
@@ -38,9 +38,9 @@ const Footer = () => {
         </Styled.ContentBox>
         <Styled.ContentBox>
           <span>Kontakt</span>
-          <IconWithText icon={iconLocation} text='42-350 Myszków, ul. Warszawska 31'/>
-          <IconWithText icon={iconEmail} text='kontakt@biuro.pl'/>
-          <IconWithText icon={iconPhone} text='+48 696 657 657'/>
+          <IconWithText icon={iconLocation} text={contact?.address}/>
+          <IconWithText icon={iconEmail} text={contact?.email}/>
+          <IconWithText icon={iconPhone} text={contact?.phone}/>
         </Styled.ContentBox>
       </Styled.InnerWrapper>
       <Styled.Copyright>

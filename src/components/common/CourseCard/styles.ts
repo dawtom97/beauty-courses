@@ -1,18 +1,13 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.article`
-  width: 300px;
   background-color: #fff;
   padding: 1.8rem;
   border-radius: 10px;
   cursor: pointer;
   flex: 1;
   transition: 0.5s;
-  min-width: 300px;
-
-  /* &:last-of-type {
-    max-width: 50%;
-  } */
+  border:1px solid #e9ecef;
 
   &:hover {
     background-color: #2c1909;

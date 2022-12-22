@@ -1,6 +1,9 @@
 import { gql } from 'graphql-request';
 import { useRouter } from 'next/router';
 import React,{useState, useEffect} from 'react';
+import BannerResults from '../src/components/BannerResults/BannerResults';
+import Results from '../src/components/Results/Results';
+import Homepage from '../src/components/templates/Homepage/Homepage';
 import { cmsConnect } from '../src/utils/cmsConnect';
 
 export const getServerSideProps = async (context: any) => {
@@ -36,7 +39,9 @@ export const getServerSideProps = async (context: any) => {
         duration
         employment
         isRemote
+        city
         level
+        vacancies
         voivodeship
         description {
           html
@@ -55,27 +60,33 @@ export const getServerSideProps = async (context: any) => {
           }
         }
       }
+      minorDatas {
+        id
+        email
+        phone
+        address
+      }
     }
+    
   `;
 
-  const { courses } = await cmsConnect(query);
+  const { courses,minorDatas } = await cmsConnect(query);
 
   return {
     props: {
       courses: courses,
+      minor:minorDatas
     },
   };
 };
 
-const ResultsPage = ({ courses }: any) => {
+const ResultsPage = ({ courses,minor }: any) => {
   const {query} = useRouter();
   const [filtered, setFiltered] = useState<any>([]);
 
   useEffect(()=>{
     handleFilter();
   },[query])
-
-  console.log(query)
 
   const handleFilter = () => {
      const data = courses.filter((course:any) => {
@@ -97,9 +108,11 @@ const ResultsPage = ({ courses }: any) => {
      setFiltered(data)
     
   }
-  console.log(filtered)
 
-  return <div>{filtered?.map((item:any) => <p key={item.title}>{item.title}</p>)}</div>;
+  return <Homepage contact={minor[0]}>
+    <BannerResults searchSuccess={filtered.length > 0 ? true : false}/>
+    <Results courses={filtered}/>
+  </Homepage>;
 };
 
 export default ResultsPage;
