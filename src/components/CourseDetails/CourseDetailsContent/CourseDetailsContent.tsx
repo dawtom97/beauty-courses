@@ -19,6 +19,7 @@ import iconAltPlace from '../../../assets/iconalt_place.svg';
 import CourseDropdownItem from '../CourseDropdownItem';
 import { ErrorText } from '../../common/ErrorText/ErrorText';
 import Link from 'next/link';
+import Breadcrumbs from '../../common/Breadcrumbs/Breadcrumbs';
 
 const initialState = {
   email: '',
@@ -36,6 +37,7 @@ const CourseDetailsContent = ({
   price,
   duration,
   level,
+  ageGroup,
   vacancies,
   employment,
   isRefunded,
@@ -53,6 +55,16 @@ const CourseDetailsContent = ({
       desc: quotes[1].replace(/<[^>]+>/g, ''),
     };
   });
+
+  const handleAgeGroup = () => {
+    if (ageGroup === 'Starsza') {
+      return 'Grupa 30+ lat';
+    } else if (ageGroup === 'Mlodsza') {
+      return 'Grupa 18-29 lat';
+    } else if (ageGroup === 'wszystkie') {
+      return 'Nie dotyczy';
+    } else return 'Nie dotyczy';
+  };
 
   const validateEmail = (data: any) => {
     const errors: any = {};
@@ -90,6 +102,7 @@ const CourseDetailsContent = ({
 
   return (
     <Styled.Wrapper>
+      <Breadcrumbs/>
       <Styled.Content>
         <Styled.Overview>
           <div id='Program'>
@@ -194,6 +207,7 @@ const CourseDetailsContent = ({
             <IconWithText icon={iconPeople} text={`Osoba ${employment}`} />
             <IconWithText icon={iconAltDuration} text={`${duration} godzin`} />
             <IconWithText icon={iconAltLevel} text={`Poziom ${level}`} />
+            <IconWithText icon={iconPeople} text={`${handleAgeGroup()}`} />
             <IconWithText icon={iconAltPlace} text={`${voivodeship}`} />
             <IconWithText
               icon={iconRefunded}

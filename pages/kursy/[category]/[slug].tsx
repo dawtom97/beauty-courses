@@ -10,14 +10,16 @@ export const getServerSideProps = async (context: any) => {
   const { slug } = params;
 
   const query = gql`
-    query Course($slug: ID!) {
-      courses(where: { id: $slug }) {
+    query Course($slug: String!) {
+      courses(where: { slug: $slug }) {
         title
         price
         duration
+        ageGroup
         level
         isRemote
         employment
+        slug
         vacancies
         dropdowns {
           html
@@ -35,6 +37,7 @@ export const getServerSideProps = async (context: any) => {
         categories {
           id
           categoryName
+          slug
           categoryImage {
             id
             url

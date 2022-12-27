@@ -47,8 +47,10 @@ export const getServerSideProps = async (context: any) => {
         id
         price
         duration
+        ageGroup
         isRemote
         level
+        slug
         vacancies
         employment
         dropdowns {
@@ -67,6 +69,7 @@ export const getServerSideProps = async (context: any) => {
         categories {
           id
           categoryName
+          slug
           categoryImage {
             id
             url
@@ -75,6 +78,7 @@ export const getServerSideProps = async (context: any) => {
       }
       categories {
         categoryName
+        slug
         boxColor {
           hex
         }
@@ -123,6 +127,7 @@ const Home = ({
   sections,
   minor
 }: InferGetStaticPropsType<typeof getServerSideProps> | any) => {
+
   return (
     <div className='app'>
       <Homepage contact={minor[0]}>

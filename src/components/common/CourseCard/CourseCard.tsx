@@ -10,9 +10,10 @@ import Link from 'next/link';
 import { Button } from '../Button/Button';
 
 const CourseCard = ({ course }: any) => {
+
   return (
     <Styled.Wrapper>
-      <Link href={`/kursy/${course.categories[0].categoryName.toLowerCase()}/${course.id}`}>
+      <Link href={`/kursy/${course.categories[0].slug}/${course.slug}`}>
         <a>
           <Styled.ImageBox>
             <Image

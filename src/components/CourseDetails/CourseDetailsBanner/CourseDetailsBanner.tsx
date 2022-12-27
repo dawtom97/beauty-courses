@@ -7,7 +7,7 @@ import IconWithText from '../../common/IconWithText/IconWithText';
 
 const CourseDetailsBanner = ({categories,city,duration,vacancies,shortDesc,title,isRemote}:any) => {
   return (
-    <Styled.Wrapper banner={categories[0].categoryImage.url}>
+    <Styled.Wrapper banner={categories[0].categoryImage?.url}>
       <Styled.Content>
         <Styled.BannerTop>
           <Styled.Badge>{categories[0].categoryName}</Styled.Badge>

@@ -36,11 +36,13 @@ export const getServerSideProps = async (context: any) => {
         id
         title
         price
+        ageGroup
         duration
         employment
         isRemote
         city
         level
+        slug
         vacancies
         voivodeship
         description {
@@ -54,6 +56,7 @@ export const getServerSideProps = async (context: any) => {
         isRefunded
         categories {
           id
+          slug
           categoryName
           categoryImage {
             id
@@ -111,7 +114,7 @@ const ResultsPage = ({ courses,minor }: any) => {
 
   return <Homepage contact={minor[0]}>
     <BannerResults searchSuccess={filtered.length > 0 ? true : false}/>
-    <Results courses={filtered}/>
+    <Results itemsPerPage={8} courses={filtered}/>
   </Homepage>;
 };
 

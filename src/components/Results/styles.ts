@@ -4,7 +4,6 @@ interface Props {
   arrow: string;
 }
 
-
 // linear-gradient(rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.1) 80%)
 
 export const Wrapper = styled.div<Props>`
@@ -56,6 +55,45 @@ export const Content = styled.div`
   z-index: 1;
   margin: 0 auto;
 
+  & > ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin: 30px auto;
+    li {
+      width: fit-content;
+      min-width: 50px;
+      margin: 2px;
+      padding: 0.5rem;
+      cursor: pointer;
+      text-align: center;
+      color: ${(props) => props.theme.text};
+      border: 1px solid #e9ecef;
+      background-color: #fff;
+      transition: 0.4s;
+      &:hover {
+        background-color: ${(props) => props.theme.secondary};
+        color: ${(props) => props.theme.body};
+      }
+      &.selected {
+        background-color: ${(props) => props.theme.primary};
+        border-color: ${(props) => props.theme.primary};
+        color: ${(props) => props.theme.body};
+      }
+      a {
+        color: inherit;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+    li:first-of-type,
+    li:last-of-type {
+      width: 80px;
+    }
+  }
+
   & h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
@@ -95,4 +133,4 @@ export const NotFound = styled.div`
     max-width: initial;
     width: 300px;
   }
-`
+`;
