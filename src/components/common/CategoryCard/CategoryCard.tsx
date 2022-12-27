@@ -71,7 +71,7 @@ const CategoryCard = ({ category }: any) => {
   };
 
   return (
-    <Link href={`/kursy/${category.categoryName.toLowerCase()}`}>
+    <Link href={`/kursy/${category.slug}`}>
       <Wrapper>
         <Circle bg={category.boxColor.hex} />
         <h3>{category.categoryName}</h3>

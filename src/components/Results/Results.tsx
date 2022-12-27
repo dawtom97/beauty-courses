@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Breadcrumbs from '../common/Breadcrumbs/Breadcrumbs';
 import ReactPaginate from 'react-paginate';
 
-const Results = ({ itemsPerPage, courses }: any) => {
+const Results = ({ itemsPerPage, courses, isCategory, isAllCourses }: any) => {
   const [currentItems, setCurrentItems] = useState<any>(courses);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -26,7 +26,7 @@ const Results = ({ itemsPerPage, courses }: any) => {
   };
 
   const handleCoursesAmount = () => {
-    if (courses.length < 1 || courses.length > 12) {
+    if (courses.length > 4) {
       return 'kursów';
     } else if (courses.length == 1) {
       return 'kurs';
@@ -41,11 +41,21 @@ const Results = ({ itemsPerPage, courses }: any) => {
         <Breadcrumbs />
         {currentItems.length ? (
           <>
-            <span>Całkiem nieźle</span>
+            <span>{isCategory ? 'Znalezione kursy' : 'Całkiem nieźle'}</span>
 
-            <h2>
-              Znaleziono {courses.length} {handleCoursesAmount()} o wskazanych parametrach
-            </h2>
+            {!isAllCourses && (
+              <h2>
+                {isCategory
+                  ? `${courses.length} ${handleCoursesAmount()} w kategorii`
+                  : `Znaleziono ${
+                      courses.length
+                    } ${handleCoursesAmount()} o wskazanych parametrach`}
+              </h2>
+            )}
+            {isAllCourses && (
+              <h2>Obecnie rekrutujemy na {courses.length} {handleCoursesAmount()}</h2>
+            )}
+
             <Styled.Cards>
               {currentItems.map((course: any) => (
                 <CourseCard key={course.id} course={course} />

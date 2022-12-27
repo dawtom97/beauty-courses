@@ -6,33 +6,11 @@ import Results from '../src/components/Results/Results';
 import Homepage from '../src/components/templates/Homepage/Homepage';
 import { cmsConnect } from '../src/utils/cmsConnect';
 
-export const getServerSideProps = async (context: any) => {
-  const { query: queries } = context;
-
-  const remoteOrNot = queries.isRemote == 'all' ? null : Boolean(Number(queries.isRemote));
-  const refundedOrNot = queries.isRefunded == 'all' ? null : Boolean(Number(queries.isRefunded));
-  const categoryName = queries.category || null;
-  const voivodeshipName = queries.voivodeship || null;
-
-  console.log(queries, remoteOrNot, refundedOrNot);
+export const getServerSideProps = async () => {
 
   const query = gql`
-    query Courses (
-      # $refunded: Boolean = ${refundedOrNot}, 
-      # $remote: Boolean = ${remoteOrNot}, 
-      # $category: String = "${categoryName}",
-      # $voivodeship: Voivodeship = ${voivodeshipName}
-      ) {
-       courses(
-      #   where: {
-      #     AND: [
-      #       { OR: [ {isRefunded: $refunded}, {isRefunded_not: $refunded}] }
-      #       { OR: [ {isRemote: $remote},{isRemote_not: $remote}] }
-      #       { voivodeship: $voivodeship }
-      #       { categories_every: { categoryName: $category } }
-      #     ]
-      #   }
-       ) {
+    query Courses () {
+       courses {
         id
         title
         price
