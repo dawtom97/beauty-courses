@@ -1,21 +1,25 @@
 import React from 'react';
-import { AllCategoriesProps } from '../../types/AllCategories.types';
-import BannerCategoryList from './BannerCategoryList/BannerCategoryList';
+import CategoryCard from '../common/CategoryCard/CategoryCard';
 import * as Styled from './styles';
+import arrow from '../../assets/course-bg.png';
 
-interface ICategories {
-    categories: AllCategoriesProps[];
-  }
-
-const Categories = ({categories}:ICategories) => {
+const Categories = ({ categories, section }: any) => {
   return (
-    <Styled.Wrapper>
-        <hr/>
-        <h2>Kategorie kursów</h2>
-        <h3>Zobacz kursy z danej kategorii</h3>
-        <BannerCategoryList categories={categories}/>
+    <Styled.Wrapper arrow={arrow.src}>
+      <Styled.Content>
+        <span>{section?.badge}</span>
+
+        <h2>{section?.title}</h2>
+
+        <p>{section?.desc}</p>
+        <div>
+          {categories.map((category: any) => (
+            <CategoryCard category={category} key={category.categoryName} />
+          ))}
+        </div>
+      </Styled.Content>
     </Styled.Wrapper>
-  )
-}
+  );
+};
 
 export default Categories;

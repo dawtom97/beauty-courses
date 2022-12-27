@@ -10,12 +10,16 @@ export const getServerSideProps = async (context: any) => {
   const { slug } = params;
 
   const query = gql`
-    query Course($slug: ID!) {
-      courses(where: { id: $slug }) {
+    query Course($slug: String!) {
+      courses(where: { slug: $slug }) {
         title
         price
         duration
+        ageGroup
         level
+        isRemote
+        employment
+        slug
         vacancies
         dropdowns {
           html
@@ -33,11 +37,18 @@ export const getServerSideProps = async (context: any) => {
         categories {
           id
           categoryName
+          slug
           categoryImage {
             id
             url
           }
         }
+      }
+      minorDatas {
+        id
+        email
+        phone
+        address
       }
     }
   `;
@@ -45,19 +56,20 @@ export const getServerSideProps = async (context: any) => {
     slug,
   };
 
-  const { courses } = await cmsConnect(query, variables);
+  const { courses, minorDatas } = await cmsConnect(query, variables);
 
   return {
     props: {
       course: courses,
+      minor:minorDatas
     },
   };
 };
 
-const CourseDetailsPage = ({ course }: any) => {
+const CourseDetailsPage = ({ course,minor }: any) => {
 
   return (
-    <CourseDetailsTemplate>
+    <CourseDetailsTemplate contact={minor[0]}>
       <CourseDetailsBanner {...course[0]}/>
       <CourseDetailsContent {...course[0]} />
     </CourseDetailsTemplate>

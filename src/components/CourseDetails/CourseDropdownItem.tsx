@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IoIosArrowUp } from 'react-icons/io';
+import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io';
 import styled from 'styled-components';
 
 export const DropdownItem = styled.div`
@@ -35,7 +35,7 @@ const CourseDropdownItem = ({item}:any) => {
   return (
     <DropdownItem >
     <h3 onClick={()=>setShowDropdown(!showDropdown)}>
-      {item?.title} <IoIosArrowUp />
+      {item?.title}{!showDropdown ? <IoIosArrowUp /> : <IoIosArrowDown/>}
     </h3>
     {showDropdown ? <p>{item?.desc}</p> : null}
   </DropdownItem>

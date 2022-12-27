@@ -5,6 +5,7 @@ export const Wrapper = styled.p`
   display: flex;
   align-items: center;
   font-size: 1.4rem;
+  transition: 0.4s;
 
   & img {
     margin-right: 0.8rem;

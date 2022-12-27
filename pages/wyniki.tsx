@@ -1,10 +1,10 @@
 import { gql } from 'graphql-request';
 import { useRouter } from 'next/router';
 import React,{useState, useEffect} from 'react';
-import BannerCategory from '../../src/components/BannerCategory/BannerCategory';
-import Results from '../../src/components/Results/Results';
-import Homepage from '../../src/components/templates/Homepage/Homepage';
-import { cmsConnect } from '../../src/utils/cmsConnect';
+import BannerResults from '../src/components/BannerResults/BannerResults';
+import Results from '../src/components/Results/Results';
+import Homepage from '../src/components/templates/Homepage/Homepage';
+import { cmsConnect } from '../src/utils/cmsConnect';
 
 export const getServerSideProps = async () => {
 
@@ -36,7 +36,6 @@ export const getServerSideProps = async () => {
           id
           slug
           categoryName
-          categoryDesc
           categoryImage {
             id
           }
@@ -62,11 +61,9 @@ export const getServerSideProps = async () => {
   };
 };
 
-const CategoryPage = ({ courses,minor }: any) => {
+const ResultsPage = ({ courses,minor }: any) => {
   const {query} = useRouter();
   const [filtered, setFiltered] = useState<any>([]);
-
-  console.log(query)
 
   useEffect(()=>{
     handleFilter();
@@ -75,7 +72,15 @@ const CategoryPage = ({ courses,minor }: any) => {
   const handleFilter = () => {
      const data = courses.filter((course:any) => {
 
-        if((course.categories[0].slug === query.category) 
+       const isTrueRefunded = (query.isRefunded === 'true');
+       const isTrueRemote = (query.isRemote === 'true');
+
+        if((course.categories[0].categoryName === query.category || query.category === 'all') &&
+           (course.voivodeship === query.voivodeship || query.voivodeship === 'All') &&
+           (course.isRefunded === isTrueRefunded || query.isRefunded === 'all') &&
+           (course.isRemote === isTrueRemote || query.isRemote === 'all') &&
+           (course.level === query.level || query.level === 'all') &&
+           (course.employment === query.employment || query.employment === 'all')
         ) {
           return true
         }
@@ -86,9 +91,9 @@ const CategoryPage = ({ courses,minor }: any) => {
   }
 
   return <Homepage contact={minor[0]}>
-    <BannerCategory category={courses.filter((item:any) => item.categories[0].slug === query.category)} searchSuccess={filtered.length > 0 ? true : false}/>
-    <Results isCategory itemsPerPage={8} courses={filtered}/>
+    <BannerResults searchSuccess={filtered.length > 0 ? true : false}/>
+    <Results itemsPerPage={8} courses={filtered}/>
   </Homepage>;
 };
 
-export default CategoryPage;
+export default ResultsPage;

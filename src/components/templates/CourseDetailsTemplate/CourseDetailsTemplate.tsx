@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../../common/Footer/Footer';
 import { Navbar } from '../../common/Navbar/Navbar';
 import { CourseDetailsProps } from './CourseDetailsTemplate.types';
 import * as Styled from './styles';
 
-const CourseDetailsTemplate = ({ children }: CourseDetailsProps) => {
+const CourseDetailsTemplate = ({ children, contact }: CourseDetailsProps) => {
+
   return (
     <Styled.Wrapper>
       <Navbar />
-      {/* <Styled.Banner banner={bannerColors}/> */}
       <Styled.Content>{children}</Styled.Content>
-      <Footer/>
+      <Footer contact={contact} />
     </Styled.Wrapper>
   );
 };
 
-export default CourseDetailsTemplate
+export default CourseDetailsTemplate;

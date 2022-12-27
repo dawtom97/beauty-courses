@@ -10,7 +10,7 @@ export const Button = styled.button`
   font-size: 1.4rem;
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 700;
   color: ${({ theme }) => theme.primary};
   cursor: pointer;
   max-width: 200px;
