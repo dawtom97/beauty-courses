@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { SyntheticEvent, useState } from 'react';
+import React, { SyntheticEvent, useState, useEffect } from 'react';
 import * as Styled from './styles';
 import { imageLoader } from '../../../utils/imageLoader';
 import { Button } from '../../common/Button/Button';
@@ -27,6 +27,10 @@ const initialState = {
   lastname: '',
   phone: '',
   content: '',
+  zipcode: '',
+  city: '',
+  course: '',
+  ageGroup:''
 };
 
 const CourseDetailsContent = ({
@@ -38,13 +42,22 @@ const CourseDetailsContent = ({
   duration,
   level,
   ageGroup,
-  vacancies,
   employment,
   isRefunded,
   voivodeship,
 }: any) => {
   const [email, setEmail] = useState<any>(initialState);
   const [errors, setErrors] = useState<any>({});
+
+  useEffect(() => {
+    setEmail({
+      ...email,
+      course:title,
+      ageGroup:ageGroup
+    });
+  }, [title,ageGroup]);
+
+  console.log(email)
 
   const dropdownsContent = dropdowns.html.split('#');
   const dropdownObj = dropdownsContent.map((item: any) => {
@@ -58,11 +71,11 @@ const CourseDetailsContent = ({
 
   const handleAgeGroup = () => {
     if (ageGroup === 'Starsza') {
-      return 'Grupa 30+ lat';
+      return 'Grupa wiekowa 30+';
     } else if (ageGroup === 'Mlodsza') {
-      return 'Grupa 18-29 lat';
+      return 'Grupa wiekowa 18-29';
     } else if (ageGroup === 'wszystkie') {
-      return 'Nie dotyczy';
+      return 'Dla osób w każdym wieku';
     } else return 'Nie dotyczy';
   };
 
@@ -70,6 +83,8 @@ const CourseDetailsContent = ({
     const errors: any = {};
     if (data.firstname.length < 2) errors.firstname = 'Imię jest wymagane';
     if (data.lastname.length < 2) errors.lastname = 'Nazwisko jest wymagane';
+    if (data.city.length < 1) errors.city = 'Musisz podać miejscowość';
+    if (data.zipcode.length < 3) errors.zipcode = 'Musisz podać kod pocztowy';
     if (!data.email.toLowerCase().match(/\S+@\S+\.\S+/)) errors.email = 'Niepoprawny adres email';
     if (data.phone.length < 4) errors.phone = 'Numer telefonu jest wymagany';
     if (Object.keys(errors).length === 0) return true;
@@ -102,7 +117,7 @@ const CourseDetailsContent = ({
 
   return (
     <Styled.Wrapper>
-      <Breadcrumbs/>
+      <Breadcrumbs />
       <Styled.Content>
         <Styled.Overview>
           <div id='Program'>
@@ -124,6 +139,18 @@ const CourseDetailsContent = ({
             <form onSubmit={(e) => sendEmail(e)}>
               <div>
                 <div>
+                  <input
+                    name='course'
+                    value={email?.course}
+                    onChange={handleEmail}
+                    type='hidden'
+                  />
+                  <input
+                    name='age'
+                    value={email?.ageGroup}
+                    onChange={handleEmail}
+                    type='hidden'
+                  />
                   <input
                     name='firstname'
                     value={email.firstname}
@@ -166,6 +193,28 @@ const CourseDetailsContent = ({
                   {errors?.phone && <ErrorText>{errors.phone}</ErrorText>}
                 </div>
               </div>
+              <div>
+                <div>
+                  <input
+                    name='zipcode'
+                    value={email.zipcode}
+                    onChange={handleEmail}
+                    placeholder='Kod pocztowy'
+                    type='text'
+                  />
+                  {errors?.zipcode && <ErrorText>{errors.zipcode}</ErrorText>}
+                </div>
+                <div>
+                  <input
+                    name='city'
+                    value={email.city}
+                    onChange={handleEmail}
+                    placeholder='Miejscowość'
+                    type='text'
+                  />
+                  {errors?.city && <ErrorText>{errors.city}</ErrorText>}
+                </div>
+              </div>
               <textarea
                 name='content'
                 value={email.content}
@@ -183,7 +232,7 @@ const CourseDetailsContent = ({
               <Image loader={imageLoader} src={thumbnail.url} layout='fill' objectFit='cover' />
             </Styled.ImageWrapper>
             <Styled.Price>
-              Koszt: <span>{price} zł</span>
+              Koszt: <span>{price < 1 ? 'DARMOWE' : price + ' zł'}</span>
             </Styled.Price>
             <Styled.Buttons>
               <Link href='#Program'>

@@ -54,6 +54,7 @@ export const Nav = styled.nav<IStyleProps>`
     padding-top: 120px;
     top: 0;
     left: 0;
+    margin-right: 2rem;
     width: 100%;
     z-index: -1;
     background-color: #fff;

@@ -17,7 +17,10 @@ export const Navbar = () => {
 
   return (
     <Styled.Wrapper>
-      <Image src={logo.src} width={120} height={30} />
+      <Link href='/' passHref>
+        <Image style={{ cursor: 'pointer' }} src={logo.src} width={120} height={30} />
+      </Link>
+
       <Hamburger
         toggled={isOpen}
         toggle={() => {
@@ -52,7 +55,7 @@ export const Navbar = () => {
               </Styled.CustomLink>
             </Link>
           </li>
-          <Button onClick={handleLinkClick}>HELLO THERE</Button>
+          {/* <Button onClick={handleLinkClick}>KATEGORIE</Button> */}
         </ul>
       </Styled.Nav>
     </Styled.Wrapper>

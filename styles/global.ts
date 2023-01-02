@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
+
 type GlobalStylesProps = {
     body:string,
     text:string
@@ -7,6 +8,7 @@ type GlobalStylesProps = {
 
 
 export const GlobalStyles = createGlobalStyle<{theme:GlobalStylesProps}>`
+
    *,
    *::before,
    *::after {
