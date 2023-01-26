@@ -5,10 +5,10 @@ const nextConfig = {
   swcMinify: true,
   compress:true,
   styledComponents: true,
-  i18n: {
-    locales: ['pl'],
-    defaultLocale: 'pl',
-  },
+  // i18n: {
+  //   locales: ['pl'],
+  //   defaultLocale: 'pl',
+  // },
 };
 
 module.exports = nextConfig;
