@@ -174,7 +174,7 @@ const Banner = ({ section,info }: any) => {
           </div>
         </Left>
         <Right>
-          <Image src={banner.src} layout='fill' objectFit='contain' />
+          <Image src={banner.src} layout='fill' alt="banner" objectFit='contain' />
         </Right>
       </Content>
       <ContentBottom>

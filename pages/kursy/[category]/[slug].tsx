@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from 'graphql-request';
+import Head from 'next/head';
 import React from 'react';
 import CourseDetailsBanner from '../../../src/components/CourseDetails/CourseDetailsBanner/CourseDetailsBanner';
 import CourseDetailsContent from '../../../src/components/CourseDetails/CourseDetailsContent/CourseDetailsContent';
@@ -68,8 +69,13 @@ export const getServerSideProps = async (context: any) => {
 
 const CourseDetailsPage = ({ course,minor }: any) => {
 
+  console.log(course)
+
   return (
     <CourseDetailsTemplate contact={minor[0]}>
+      <Head>
+        <title>{course[0].title}</title>
+      </Head>
       <CourseDetailsBanner {...course[0]}/>
       <CourseDetailsContent {...course[0]} />
     </CourseDetailsTemplate>

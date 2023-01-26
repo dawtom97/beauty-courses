@@ -67,7 +67,7 @@ const Results = ({ itemsPerPage, courses, isCategory, isAllCourses }: any) => {
             <Styled.NotFound>
               <span>Bez paniki</span>
               <h2>Wkrótce na pewno pojawi się kurs, którego szukasz</h2>
-              <Image src={notFound.src} width={400} height={200} objectFit={'contain'} />
+              <Image alt="obrazek 404" src={notFound.src} width={400} height={200} objectFit={'contain'} />
               <Link href='/#Search'>
                 <Button>Szukaj dalej</Button>
               </Link>

@@ -12,7 +12,7 @@ const About = ({section}:any) => {
     <Styled.Wrapper bg={bg.src} arrow={arrow.src}>
       <Styled.Content>
         <Styled.Left>
-          <img src={aboutImg.src}  />
+          <img alt="ikonka" src={aboutImg.src}  />
         </Styled.Left>
         <Styled.Right>
           <span>{section?.badge}</span>

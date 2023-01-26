@@ -18,7 +18,7 @@ export const Navbar = () => {
   return (
     <Styled.Wrapper>
       <Link href='/' passHref>
-        <Image style={{ cursor: 'pointer' }} src={logo.src} width={120} height={30} />
+        <Image alt="logo" style={{ cursor: 'pointer' }} src={logo.src} width={120} height={30} />
       </Link>
 
       <Hamburger

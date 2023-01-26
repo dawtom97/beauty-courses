@@ -33,14 +33,17 @@ const Content = styled.div`
   }
 `;
 
+
 const BannerCategory = ({ searchSuccess,category }: any) => {
-    console.log(category)
+
+  if(!category) return null;
+
   return (
     <Wrapper bg={bg.src}>
       <Content>
-        <h2>{category[0].categories[0].categoryName}</h2>
+        <h2>{category.categoryName}</h2>
         <p>
-          {category[0].categories[0].categoryDesc}
+          {category.categoryDesc}
         </p>
       </Content>
     </Wrapper>

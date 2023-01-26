@@ -21,7 +21,7 @@ interface Props {
 
 const IconWithText = ({icon,text}:Props) => {
   return (
-    <Wrapper><img src={icon.src}/> {text}</Wrapper>
+    <Wrapper><img alt="ikonka" src={icon.src}/> {text}</Wrapper>
   )
 }
 

@@ -17,6 +17,7 @@ const CourseCard = ({ course }: any) => {
         <a>
           <Styled.ImageBox>
             <Image
+              alt={course.title}
               loader={imageLoader}
               src={course.thumbnail.url}
               width={300}

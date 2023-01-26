@@ -1,8 +1,15 @@
-import Document, { Html, Head, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
-import { ServerStyleSheet } from 'styled-components'
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx:DocumentContext):Promise<DocumentInitialProps | any> {
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps | any> {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -35,6 +42,10 @@ class MyDocument extends Document {
           <link
             href='https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap'
             rel='stylesheet'
+          />
+          <meta
+            name='description'
+            content='Interesujesz się branż beauty, ale nie wiesz gdzie zacząć? Odwiedź naszą stronę i wyszukaj interesujący Cię kurs, w ofercie mamy wiele darmowych szkoleń w całej Polsce'
           />
         </Head>
         <body>

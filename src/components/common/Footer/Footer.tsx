@@ -12,7 +12,7 @@ const Footer = ({contact}:any) => {
     <Styled.Wrapper id="Contact">
       <Styled.InnerWrapper>
         <Styled.IconBox>
-          <Image src={logo.src} width={120} height={30} />
+          <Image alt="logo" src={logo.src} width={120} height={30} />
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consequat mauris Lorem ipsum
             dolor sit amet, consectetur adipiscing elit. Ut consequat mauris

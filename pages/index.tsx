@@ -7,6 +7,7 @@ import Featured from '../src/components/Featured/Featured';
 import Categories from '../src/components/Categories/Categories';
 import About from '../src/components/About/About';
 import Banner from '../src/components/Banner/Banner';
+import Head from 'next/head';
 
 // export const getStaticProps = async () => {
 //   const query = gql`
@@ -130,6 +131,10 @@ const Home = ({
 
   return (
     <div className='app'>
+      <Head>
+        <title>Beauty Courses</title>
+      </Head>
+
       <Homepage contact={minor[0]}>
         <Banner section={sections[4]} info={minor[0]} />
         <SearchPanel section={sections[3]} categories={categories} />

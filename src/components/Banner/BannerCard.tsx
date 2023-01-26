@@ -34,7 +34,7 @@ const Wrapper = styled.div`
 const BannerCard = ({ icon, amount, text }: any) => {
   return (
     <Wrapper>
-      <Image src={icon} width={80} height={80} />
+      <Image alt="ikonka" src={icon} width={80} height={80} />
       <div>
         <span>{amount}</span>
         <p>{text}</p>

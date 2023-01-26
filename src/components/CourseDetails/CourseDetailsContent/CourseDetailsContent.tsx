@@ -229,7 +229,7 @@ const CourseDetailsContent = ({
         <Styled.Aside>
           <Styled.AsideBox>
             <Styled.ImageWrapper>
-              <Image loader={imageLoader} src={thumbnail.url} layout='fill' objectFit='cover' />
+              <Image alt="ikonka" loader={imageLoader} src={thumbnail.url} layout='fill' objectFit='cover' />
             </Styled.ImageWrapper>
             <Styled.Price>
               Koszt: <span>{price < 1 ? 'DARMOWE' : price + ' zł'}</span>
