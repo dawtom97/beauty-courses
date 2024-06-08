@@ -78,19 +78,20 @@ export const SelectField = styled.div`
   flex-direction: column;
   cursor: pointer;
   padding: 1rem 0;
-  border-right: 1px solid #e9ecef;
+  /* border-right: 1px solid #e9ecef; */
 
-  &:hover {
+  /* &:hover, &:hover input {
     background-color: #fafafa;
     border-radius: 8px;
     border-color: #fafafa;
-  }
+  } */
 
   & label {
     display: block;
     color: #8f7bf0;
     font-size: 1.4rem;
     font-weight: 700;
+    padding-left: 10px;
     margin-bottom: 1rem;
     cursor: pointer;
   }

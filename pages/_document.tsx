@@ -35,7 +35,7 @@ class MyDocument extends Document {
   }
   render() {
     return (
-      <Html>
+      <Html lang='pl'>
         <Head>
           <link rel='preconnect' href='https://fonts.googleapis.com' />
           <link rel='preconnect' href='https://fonts.gstatic.com' />
@@ -45,7 +45,7 @@ class MyDocument extends Document {
           />
           <meta
             name='description'
-            content='Interesujesz się branż beauty, ale nie wiesz gdzie zacząć? Odwiedź naszą stronę i wyszukaj interesujący Cię kurs, w ofercie mamy wiele darmowych szkoleń w całej Polsce'
+            content='Interesujesz się branżą beauty, ale nie wiesz gdzie zacząć? Odwiedź naszą stronę i wyszukaj interesujący Cię kurs, w ofercie mamy wiele darmowych szkoleń w całej Polsce'
           />
         </Head>
         <body>

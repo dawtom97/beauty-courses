@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { Button } from '../common/Button/Button';
 import * as Styled from './styles';
+import Select from 'react-select';
 
 const initialFilters = {
   category: 'all',
@@ -12,105 +13,176 @@ const initialFilters = {
   employment: 'all',
 };
 
-const SearchPanel = ({ section, categories }: any) => {
-  const [filters, setFilters] = useState<any>(initialFilters);
+const customStyles = {
+  control: (provided: any) => ({
+    ...provided,
+    borderColor: '#fafafa',
+    minHeight: '35px',
+    padding: '0 !important',
+    fontWeight: '700',
+    height: '35px',
+    fontSize: '16px',
+    boxShadow: 'none',
+    '&:hover': {
+      borderColor: 'none',
+      backgroundColor: '#fafafa',
+      cursor:'pointer'
+    },
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
+    color: state.isSelected ? 'white' : 'black',
+    backgroundColor: state.isSelected ? '#8f7bf0' : 'white',
+    fontSize: 16,
+  }),
+  dropdownIndicator: (provided: any) => ({
+    ...provided,
+    color: '#8f7bf0',
+  }),
+  clearIndicator: (provided: any) => ({
+    ...provided,
+    color: 'red',
+  }),
+  menu: (provided: any) => ({
+    ...provided,
+    // you can add additional styling here
+    '&:hover': {
+      borderColor: 'none',
+      backgroundCOlor: '#fafafa',
+    },
+  }),
+};
 
-  const handleChange = (e: any) => {
+const SearchPanel = ({ section, categories }: any) => {
+  const [filters, setFilters] = useState(initialFilters);
+
+  const handleChange = (name: any) => (value: any) => {
+    console.log(name, value);
     setFilters({
       ...filters,
-      [e.target.name]: e.target.value,
+      [name]: value.value,
     });
   };
 
+  // Tworzenie opcji dla selectów
+  const voivodeships = [
+    'Śląskie',
+    'Małopolskie',
+    'Podkarpackie',
+    'Opolskie',
+    'Dolnośląskie',
+    'Świętokrzyskie',
+    'Łódzkie',
+    'Lubuskie',
+    'Lubelskie',
+    'Wielkopolskie',
+    'Mazowieckie',
+    'Kujawsko-Pomorskie',
+    'Warmińsko-Mazurskie',
+    'Pomorskie',
+    'Podlaskie',
+    'Zachodniopomorskie',
+  ].map((voivodeship) => ({ value: voivodeship, label: voivodeship }));
+
   return (
     <Styled.Wrapper>
-      <Styled.Content id="Search">
+      <Styled.Content id='Search'>
         <span>{section?.badge}</span>
-
         <h2>{section?.title}</h2>
-
         <p>{section?.desc}</p>
 
         <Styled.SearchForm>
           <Styled.SelectField>
-            <label htmlFor=''>Kategoria</label>
-            <select onChange={handleChange} name='category'>
-              <option value=''>wszystkie</option>
-              {categories?.map((category: any) => (
-                <option value={category.categoryName} key={category.categoryName}>
-                  {category.categoryName}
-                </option>
-              ))}
-            </select>
+            <label>Kategoria</label>
+            <Select
+              styles={customStyles}
+              options={categories.map((cat: any) => ({
+                value: cat.categoryName,
+                label: cat.categoryName,
+              }))}
+              onChange={handleChange('category')}
+              placeholder='Wszystkie'
+              isClearable
+            />
           </Styled.SelectField>
 
           <Styled.SelectField>
-            <label htmlFor=''>Dofinansowanie</label>
-            <select onChange={handleChange} name='isRefunded'>
-              <option value='all'>wszystkie</option>
-              <option value='true'>Tak</option>
-              <option value='false'>Nie</option>
-            </select>
+            <label>Dofinansowanie</label>
+            <Select
+              styles={customStyles}
+              options={[
+                { value: 'true', label: 'Tak' },
+                { value: 'false', label: 'Nie' },
+                { value: 'all', label: 'wszystkie' },
+              ]}
+              onChange={handleChange('isRefunded')}
+              placeholder='Wszystkie'
+              isClearable
+            />
           </Styled.SelectField>
+
           <Styled.SelectField>
-            <label htmlFor=''>Województwo</label>
-            <select onChange={handleChange} name='voivodeship'>
-              <option value='all'>wszystkie</option>
-              <option value='Slaskie'>Śląskie</option>
-              <option value='Malopolskie'>Małopolskie</option>
-              <option value='Podkarpackie'>Podkarpackie</option>
-              <option value='Opolskie'>Opolskie</option>
-              <option value='Dolnoslaskie'>Dolnośląskie</option>
-              <option value='Swietokrzyskie'>Świętokrzyskie</option>
-              <option value='Lodzkie'>Łódzkie</option>
-              <option value='Lubuskie'>Lubuskie</option>
-              <option value='Lubelskie'>Lubelskie</option>
-              <option value='Wielkopolskie'>Wielkopolskie</option>
-              <option value='Mazowieckie'>Mazowieckie</option>
-              <option value='KujawskoPomorskie'>Kujawsko-Pomorskie</option>
-              <option value='WarminskoMazurskie'>Warmińsko-Mazurskie</option>
-              <option value='Pomorskie'>Pomorskie</option>
-              <option value='Podlaskie'>Podlaskie</option>
-              <option value='Zachodniopomorskie'>Zachodniopomorskie</option>
-            </select>
+            <label>Województwo</label>
+            <Select
+              styles={customStyles}
+              options={voivodeships}
+              onChange={handleChange('voivodeship')}
+              placeholder='Wszystkie'
+              isClearable
+            />
           </Styled.SelectField>
+
           <Styled.SelectField>
-            <label htmlFor=''>Tryb</label>
-            <select onChange={handleChange} name='isRemote'>
-              <option value='all'>wszystkie</option>
-              <option value='true'>Zdalne</option>
-              <option value='false'>Stacjonarne</option>
-            </select>
+            <label>Tryb</label>
+            <Select
+              styles={customStyles}
+              options={[
+                { value: 'true', label: 'Zdalne' },
+                { value: 'false', label: 'Stacjonarne' },
+                { value: 'all', label: 'wszystkie' },
+              ]}
+              onChange={handleChange('isRemote')}
+              placeholder='Wszystkie'
+              isClearable
+            />
           </Styled.SelectField>
+
           <Styled.SelectField>
-            <label htmlFor=''>Poziom</label>
-            <select onChange={handleChange} name='level'>
-              <option value='all'>wszystkie</option>
-              <option value='Podstawowy'>Podstawowy</option>
-              <option value='Sredniozaawansowany'>Średniozaawansowany</option>
-              <option value='Zaawansowany'>Zaawansowany</option>
-            </select>
+            <label>Poziom</label>
+            <Select
+             styles={customStyles}
+              options={[
+                { value: 'Podstawowy', label: 'Podstawowy' },
+                { value: 'Średniozaawansowany', label: 'Średniozaawansowany' },
+                { value: 'Zaawansowany', label: 'Zaawansowany' },
+                { value: 'all', label: 'wszystkie' },
+              ]}
+              onChange={handleChange('level')}
+              placeholder='Wszystkie'
+              isClearable
+            />
           </Styled.SelectField>
+
           <Styled.SelectField>
-            <label htmlFor=''>Status na rynku pracy</label>
-            <select onChange={handleChange} name='employment'>
-              <option value='all'>wszystkie</option>
-              <option value='zatrudniona'>osoba zatrudniona</option>
-              <option value='bezrobotna'>osoba bezrobotna</option>
-            </select>
+            <label>Status na rynku pracy</label>
+            <Select
+             styles={customStyles}
+              options={[
+                { value: 'zatrudniona', label: 'osoba zatrudniona' },
+                { value: 'bezrobotna', label: 'osoba bezrobotna' },
+                { value: 'all', label: 'wszystkie' },
+              ]}
+              onChange={handleChange('employment')}
+              placeholder='Wszystkie'
+              isClearable
+            />
           </Styled.SelectField>
         </Styled.SearchForm>
+
         <Link
           href={{
             pathname: '/wyniki',
-            query: {
-              category: filters.category,
-              voivodeship: filters.voivodeship,
-              isRefunded: filters.isRefunded,
-              isRemote: filters.isRemote,
-              level: filters.level,
-              employment: filters.employment,
-            },
+            query: filters,
           }}
         >
           <Button>Wyszukaj</Button>
